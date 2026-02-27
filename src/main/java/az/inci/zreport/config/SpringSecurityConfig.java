@@ -30,7 +30,7 @@ public class SpringSecurityConfig
         HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
         requestCache.setMatchingRequestParameterName(null);
         http.csrf(AbstractHttpConfigurer::disable);
-        http.requiresChannel(registry -> registry.anyRequest().requiresSecure());
+        http.redirectToHttps(registry -> registry.configure(http));
         http.userDetailsService(userDetailsService);
         http.authorizeHttpRequests(matcherRegistry -> matcherRegistry
                 .requestMatchers("/login",
